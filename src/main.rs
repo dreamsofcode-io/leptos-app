@@ -8,7 +8,9 @@ async fn main() {
     use leptos_axum::{generate_route_list, LeptosRoutes};
     use leptos_app::app::*;
 
-    let conf = get_configuration(None).unwrap();
+    // When the server binary is run directly (for example in Docker),
+    // load Leptos config from Cargo.toml instead of relying on cargo-leptos env vars.
+    let conf = get_configuration(Some("Cargo.toml")).unwrap();
     let addr = conf.leptos_options.site_addr;
     let leptos_options = conf.leptos_options;
     // Generate the list of routes in your Leptos App
